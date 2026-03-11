@@ -4,54 +4,54 @@ const map = new mapboxgl.Map(
     {
         container: 'main-map1',
         style: 'mapbox://styles/daniel81017/cmlofzis0001i01qn3jjqaxjd',
-        center: [-0.02421, 51.58095],
-        zoom: 12.5,
+        center: [-79.39516, 43.66338],
+        zoom: 14,
     }
 );
 
-
 map.on('load', () => {
-    map.addSource('walthamstow-data', {
+    map.addSource('map-data', {
         type: 'geojson',
-        data: "https://raw.githubusercontent.com/daniel81017/Lab2/refs/heads/main/walthamstow.geojson",
+        data: "https://raw.githubusercontent.com/daniel81017/Lab3/refs/heads/main/lab3.geojson",
     });
 
     map.addLayer({
-        'id': 'walthamstow-lines',
+        'id': 'official-bikelanes',
         'type': 'line',
-        'source': 'walthamstow-data',
+        'source': 'map-data',
         'paint': {
-            'line-width': 3,
-            'line-color': '#210059'
+            'line-width': 1.5,
+            'line-color': '#22f513'
         },
         'filter': ['==', ['geometry-type'], 'LineString'],
     });
 
     map.addLayer({
-        'id': 'walthamstow-points',
+        'id': 'study-spots',
         'type': 'circle',
-        'source': 'walthamstow-data',
+        'source': 'map-data',
         'paint': {
             'circle-width': 10,
-            'circle-color': '#000000',
+            'circle-color': '#0d5bd1',
             'circle-outline': 2,
         },
         'filter': ['==', ['geometry-type'], 'Point'],
     });
+// CREATE FILL OPACITY + CHANGING TRANSPARENCY W/ SCROLL
     map.addLayer({
-        'id': 'walthamstow-polygon',
+        'id': 'campus',
         'type': 'line',
-        'source': 'walthamstow-data',
+        'source': 'map-data',
         'paint': {
             'line-width': 3,
             'line-color': '#ff0000'
         },
         'filter': ['==', ['geometry-type'], 'Polygon'],
     });
-
-    map.addInteraction('walthamstow-click-interaction', {
+// CHANGE CLICKS TO BE FOR UOFT
+    map.addInteraction('study-spots-click-interaction', {
         type: 'click',
-        target: {layerId: 'walthamstow-points'},
+        target: {layerId: 'study-spots'},
         handler: (e) => {
             console.log("e =", e);
             const coordinates = e.feature.geometry.coordinates.slice();

@@ -4,7 +4,7 @@
         {
             "type": "Feature",
             "properties": {
-                "St. George Campus": ""
+                "description": "St. George Campus"
             },
             "geometry": {
                 "coordinates": [
@@ -170,7 +170,7 @@
         {
             "type": "Feature",
             "properties": {
-                "Sidney Smith Hall": ""
+                "description": "Sidney Smith Hall"
             },
             "geometry": {
                 "coordinates": [
@@ -184,7 +184,7 @@
         {
             "type": "Feature",
             "properties": {
-                "Robarts Library Harbord Apex": ""
+                "description": "Robarts Library Harbord Apex"
             },
             "geometry": {
                 "coordinates": [
@@ -198,7 +198,7 @@
         {
             "type": "Feature",
             "properties": {
-                "Earth Sciences Building": ""
+                "description": "Earth Sciences Building"
             },
             "geometry": {
                 "coordinates": [
@@ -212,7 +212,7 @@
         {
             "type": "Feature",
             "properties": {
-                "University College": ""
+                "description": "University College"
             },
             "geometry": {
                 "coordinates": [
@@ -226,7 +226,7 @@
         {
             "type": "Feature",
             "properties": {
-                "St. George Street NB Bike Lane": ""
+                "description": "St. George Street NB Bike Lane"
             },
             "geometry": {
                 "coordinates": [
@@ -254,7 +254,7 @@
         {
             "type": "Feature",
             "properties": {
-                "St. George Street SB Bike Lane": ""
+                "description": "St. George Street SB Bike Lane"
             },
             "geometry": {
                 "coordinates": [
@@ -278,7 +278,7 @@
         {
             "type": "Feature",
             "properties": {
-                "Harbord/Hoskin EB Bike Lane": "Protected"
+                "description": "Harbord/Hoskin EB Bike Lane Protected"
             },
             "geometry": {
                 "coordinates": [
@@ -306,7 +306,7 @@
         {
             "type": "Feature",
             "properties": {
-                "Harbord/Hoskin WB Bike Lane": "Protected"
+                "description": "Harbord/Hoskin WB Bike Lane Protected"
             },
             "geometry": {
                 "coordinates": [
@@ -334,7 +334,7 @@
         {
             "type": "Feature",
             "properties": {
-                "Front Campus King's College Circle": ""
+                "description": "Front Campus King's College Circle"
             },
             "geometry": {
                 "type": "Polygon",
