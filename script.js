@@ -9,6 +9,7 @@ const map = new mapboxgl.Map(
     }
 );
 
+
 map.on('load', () => {
     map.addSource('walthamstow-data', {
         type: 'geojson',
