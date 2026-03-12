@@ -9,6 +9,8 @@ const map = new mapboxgl.Map(
     }
 );
 
+let hoveredPolygonId = null;
+
 map.on('load', () => {
     map.addSource('map-data', {
         type: 'geojson',
@@ -37,7 +39,27 @@ map.on('load', () => {
         },
         'filter': ['==', ['geometry-type'], 'Point'],
     });
-// CREATE FILL OPACITY + CHANGING TRANSPARENCY W/ SCROLL
+
+    // CREATE FILL OPACITY + CHANGING TRANSPARENCY W/ SCROLL
+    // CHANGE FRONT CAMPUS OBJECT TO UNIQUE CLASSIFICATION (CHANGE FILTER OR REMOVE ENTIRELY, OR USE IF/ELSE?)
+
+    map.addLayer({
+        'id': 'campus-fill',
+        'type': 'fill',
+        'source': 'map-data',
+        'layout': {},
+        'paint': {
+            'fill-color': '#627BC1', //CHANGE FILL COLOUR
+            'fill-opacity': [
+                'case',
+                ['boolean', ['feature-state', 'hover'], false], //INTERPRET ARRAY CORRECTLY
+                1,
+                0.5
+            ]
+        },
+        'filter': ['==', ['geometry-type'], 'Polygon'],
+    });
+
     map.addLayer({
         'id': 'campus',
         'type': 'line',
@@ -48,21 +70,49 @@ map.on('load', () => {
         },
         'filter': ['==', ['geometry-type'], 'Polygon'],
     });
-// CHANGE CLICKS TO BE FOR UOFT
+
     map.addInteraction('study-spots-click-interaction', {
         type: 'click',
-        target: {layerId: 'study-spots'},
+        target: { layerId: 'study-spots' },
         handler: (e) => {
             console.log("e =", e);
             const coordinates = e.feature.geometry.coordinates.slice();
             const description = e.feature.properties.description;
-            
+
             new mapboxgl.Popup()
                 .setLngLat(coordinates)
                 .setHTML(description)
                 .addTo(map);
         }
     });
+
+    map.on('mousemove', 'campus-fill', (e) => {
+        if (e.features.length > 0) {
+            if (hoveredPolygonId !== null) {
+                map.setFeatureState(
+                    { source: 'map-data', id: hoveredPolygonId },
+                    { hover: false }
+                );
+            }
+            hoveredPolygonId = e.features[0].id;
+            map.setFeatureState(
+                { source: 'map-data', id: hoveredPolygonId },
+                { hover: true }
+            );
+        }
+    });
+
+    // REVERT hoveredPolygonId to NULL with MOUSELEAVE
+    map.on('mouseleave', 'campus-fill', () => {
+        if (hoveredPolygonId !== null) {
+            map.setFeatureState(
+                { source: 'map-data', id: hoveredPolygonId},
+                { hover: false }
+            );
+        }
+        hoveredPolygonId = null;
+    });
+
 });
 
 //Filter source: https://github.com/mapbox/mapbox-gl-js/issues/6508
