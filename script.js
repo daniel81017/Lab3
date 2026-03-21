@@ -1,5 +1,7 @@
+//Mapbox Public Token
 mapboxgl.accessToken = "pk.eyJ1IjoiZGFuaWVsODEwMTciLCJhIjoiY21rZWI2eGg4MDU5NjNscHdxbjhkMTNmciJ9.jdsMukp7zHz3llySNBJs0A"
 
+//Map with default center and zoom
 const map = new mapboxgl.Map(
     {
         container: 'main-map1',
@@ -9,8 +11,10 @@ const map = new mapboxgl.Map(
     }
 );
 
+//Variable for the hover event filling the campus boundary (placed here for consistency purposes)
 let hoveredPolygonId = null;
 
+//Following map load, spatial data (GeoJSON file) is referenced from the remote repository, with its layers symbolized and added to the map
 map.on('load', () => {
     map.addSource('map-data', {
         type: 'geojson',
@@ -40,9 +44,6 @@ map.on('load', () => {
         'filter': ['==', ['geometry-type'], 'Point'],
     });
 
-    // CREATE FILL OPACITY + CHANGING TRANSPARENCY W/ SCROLL
-    // CHANGE FRONT CAMPUS OBJECT TO UNIQUE CLASSIFICATION (CHANGE FILTER OR REMOVE ENTIRELY, OR USE IF/ELSE?)
-
     map.addLayer({
         'id': 'campus-fill',
         'type': 'fill',
@@ -53,8 +54,8 @@ map.on('load', () => {
             'fill-opacity': [
                 'case',
                 ['boolean', ['feature-state', 'hover'], false], //INTERPRET ARRAY CORRECTLY
-                1,
-                0.5
+                0.75,
+                0.2
             ]
         },
         'filter': ['==', ['geometry-type'], 'Polygon'],
@@ -86,6 +87,7 @@ map.on('load', () => {
         }
     });
 
+    //Fill campus boundary with mouse hover
     map.on('mousemove', 'campus-fill', (e) => {
         if (e.features.length > 0) {
             if (hoveredPolygonId !== null) {
@@ -102,15 +104,31 @@ map.on('load', () => {
         }
     });
 
-    // REVERT hoveredPolygonId to NULL with MOUSELEAVE
     map.on('mouseleave', 'campus-fill', () => {
         if (hoveredPolygonId !== null) {
             map.setFeatureState(
-                { source: 'map-data', id: hoveredPolygonId},
+                { source: 'map-data', id: hoveredPolygonId },
                 { hover: false }
             );
         }
         hoveredPolygonId = null;
+    //Zoom to feature
+    map.on('click', 'study-spots', (e) => {
+        // map.flyTo({center: [0, 0], zoom: 9});
+        map.flyTo({
+            center: e.features[0].geometry.coordinates, zoom: 20
+        });
+    });
+
+    // Change the pointer to cursor when hovering over point features, reverting back to pointer when not hovering.
+    map.on('mouseenter', 'study-spots', () => {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+
+    map.on('mouseleave', 'study-spots', () => {
+        map.getCanvas().style.cursor = '';
+    });
+    
     });
 
 });
