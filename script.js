@@ -110,28 +110,23 @@ map.on('load', () => {
     // }
 
     map.on('click', 'campus-fill', (e) => {
-        if (map.flyTo({
+        map.flyTo({
             center: [-79.39916, 43.66226], zoom: 15, //center: e.features[0].geometry.coordinates, zoom: 20,
-        })) {}
+        })
+        if (!map.removeLayer('study-spots')) { }
 
 
-        console.log("alksdjflasdkjfal");
-        if (map.removeLayer('study-spots')) {
-
-        }
-
-    });
-
-    map.addLayer({
-        'id': 'study-spots',
-        'type': 'circle',
-        'source': 'map-data',
-        'paint': {
-            'circle-width': 10,
-            'circle-color': '#627BC1',
-            'circle-outline': 2,
-        },
-        'filter': ['==', ['geometry-type'], 'Point'],
+        map.addLayer({
+            'id': 'study-spots',
+            'type': 'circle',
+            'source': 'map-data',
+            'paint': {
+                'circle-width': 10,
+                'circle-color': '#627BC1',
+                'circle-outline': 2,
+            },
+            'filter': ['==', ['geometry-type'], 'Point'],
+        });
     });
     // Change the pointer to cursor when hovering over point features, reverting back to pointer when not hovering.
     map.on('mouseenter', 'study-spots', () => {
@@ -161,7 +156,10 @@ map.on('load', () => {
     map.on('click', 'study-spots', (e) => {
         // map.flyTo({center: [0, 0], zoom: 9});
         map.flyTo({
-            center: e.features[0].geometry.coordinates, zoom: 20
+            center: e.features[0].geometry.coordinates,
+            zoom: 16.5,
+            bearing: 355,
+            pitch: 75,
         });
     });
 });
