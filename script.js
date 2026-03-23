@@ -12,6 +12,8 @@ const map = new mapboxgl.Map(
         style: 'mapbox://styles/daniel81017/cmlofzis0001i01qn3jjqaxjd',
         center: center,
         zoom: 14,
+        pitch: 0,
+        bearing: 0, 
     }
 );
 
@@ -93,21 +95,6 @@ map.on('load', () => {
 
     // POINT FEATURE STUFF
     // Fly to center on campus boundary click
-    // SAMPLE FROM ABOVE, INTEGRATE W/ BELOW, USE HOVEREDCLICKID = NULL FROM ABOVE
-
-    // if (e.features.length > 0) {
-    //     if (hoveredPolygonId !== null) {
-    //         map.setFeatureState(
-    //             { source: 'map-data', id: hoveredPolygonId },
-    //             { hover: false }
-    //         );
-    //     }
-    //     hoveredPolygonId = e.features[0].id;
-    //     map.setFeatureState(
-    //         { source: 'map-data', id: hoveredPolygonId },
-    //         { hover: true }
-    //     );
-    // }
 
     map.on('click', 'campus-fill', (e) => {
         map.flyTo({
@@ -140,7 +127,7 @@ map.on('load', () => {
     // Opens pop-up after clicking point
     map.addInteraction('study-spots-click-interaction', {
         type: 'click',
-        target: { layerId: 'study-spots' },
+        target: {layerId: 'study-spots'},
         handler: (e) => {
             const coordinates = e.feature.geometry.coordinates.slice();
             const description = e.feature.properties.description;
@@ -152,13 +139,20 @@ map.on('load', () => {
         }
     });
 
+    map.setFeatureState({
+        source: 'map-data',
+
+
+
+    });
+
     //Zoom to feature
     map.on('click', 'study-spots', (e) => {
         // map.flyTo({center: [0, 0], zoom: 9});
         map.flyTo({
             center: e.features[0].geometry.coordinates,
             zoom: 16.5,
-            bearing: 355,
+            bearing: angle,
             pitch: 75,
         });
     });

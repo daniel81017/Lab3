@@ -212,7 +212,8 @@
         {
             "type": "Feature",
             "properties": {
-                "description": "University College"
+                "description": "University College",
+                "bearing": 355
             },
             "geometry": {
                 "coordinates": [
