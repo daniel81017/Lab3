@@ -2,5 +2,20 @@
     position: relative;
     width: 100%;
     height: 600px;
-/* Top/bottom removed because they created complications for sizing in context of Bootstrap row/column parameters. */
+    /* Top/bottom removed because they created complications for sizing in context of Bootstrap row/column parameters. */
+};
+
+#defaultviewbutton {
+    display: block;
+    position: relative;
+    margin: 0px auto;
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 0px;
+    font-size: 12px;
+    text-align: center;
+    color: #fff;
+    background: #ee8a65;
 };

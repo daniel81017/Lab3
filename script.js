@@ -4,6 +4,9 @@ mapboxgl.accessToken = "pk.eyJ1IjoiZGFuaWVsODEwMTciLCJhIjoiY21rZWI2eGg4MDU5NjNsc
 //Variable declaration
 
 const center = [-79.39516, 43.66338];
+const zoom = 14;
+const pitch = 0;
+const bearing = 0;
 
 //Map with default center and zoom
 const map = new mapboxgl.Map(
@@ -11,9 +14,9 @@ const map = new mapboxgl.Map(
         container: 'main-map1',
         style: 'mapbox://styles/daniel81017/cmlofzis0001i01qn3jjqaxjd',
         center: center,
-        zoom: 14,
-        pitch: 0,
-        bearing: 0, 
+        zoom: zoom,
+        pitch: pitch,
+        bearing: bearing,
     }
 );
 
@@ -48,8 +51,8 @@ map.on('load', () => {
             'fill-opacity': [
                 'case',
                 ['boolean', ['feature-state', 'hover'], false], //INTERPRET ARRAY CORRECTLY
-                0,
-                0.2
+                0.3,
+                0
             ]
         },
         'filter': ['==', ['geometry-type'], 'Polygon'],
@@ -97,10 +100,12 @@ map.on('load', () => {
 
     map.on('click', 'campus-fill', (e) => {
         map.flyTo({
-            center: [-79.39916, 43.66226], zoom: 15, //center: e.features[0].geometry.coordinates, zoom: 20,
+            center: [-79.39916, 43.66226], //center: e.features[0].geometry.coordinates, zoom: 20,
+            zoom: 15,
+            pitch: pitch,
+            bearing: bearing,
         })
-        if (!map.removeLayer('study-spots')) {}
-
+        if (!map.removeLayer('study-spots')) { }
 
         map.addLayer({
             'id': 'study-spots',
@@ -113,6 +118,7 @@ map.on('load', () => {
             },
             'filter': ['==', ['geometry-type'], 'Point'],
         });
+        if (!map.removeLayer('campus-fill')) { }
     });
     // Change the pointer to cursor when hovering over point features, reverting back to pointer when not hovering.
     map.on('mouseenter', 'study-spots', () => {
@@ -123,39 +129,49 @@ map.on('load', () => {
         map.getCanvas().style.cursor = '';
     });
 
+    const popup = new mapboxgl.Popup()
+
     // Opens pop-up after clicking point
     map.addInteraction('study-spots-click-interaction', {
         type: 'click',
-        target: {layerId: 'study-spots'},
+        target: { layerId: 'study-spots' },
         handler: (e) => {
             const coordinates = e.feature.geometry.coordinates.slice();
             const description = e.feature.properties.description;
 
-            new mapboxgl.Popup()
+            const popup = new mapboxgl.Popup()
                 .setLngLat(coordinates)
                 .setHTML(description)
                 .addTo(map);
-        }
+
+            popup.on('close', (e) => {
+                console.log('adlkfja;ldfjkasldfjk yay');
+            });
+            },
+
     });
 
     //Zoom to feature
     map.on('click', 'study-spots', (e) => {
-        // const bearingValues = {
-        //     "University College": 355,
-        //     "Earth Sciences Building": 290,
-        //     "Robarts Library Harbord Apex": 100,
-        //     "Sidney Smith Hall": 39,
-        // }
-        // const bearing = bearingValues[e.feature.properties.description];
-        // map.flyTo({center: [0, 0], zoom: 9});
         map.flyTo({
             center: e.features[0].geometry.coordinates,
             zoom: 16.5,
             bearing: e.features[0].properties.bearing,
             pitch: 75,
         });
+    });
+
+    document.getElementById('defaultviewbutton').addEventListener('click', () => {
+        map.flyTo({
+            center: center,
+            zoom: zoom,
+            bearing: bearing,
+            pitch: zoom,
+        });
 
     });
+
+
 });
 
 
