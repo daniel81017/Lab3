@@ -123,7 +123,7 @@ const reloadonclick = function () {
             'source': 'map-data',
             'paint': {
                 'circle-width': 10,
-                'circle-color': '#627BC1',
+                'circle-color': '#000000',
                 'circle-outline': 2,
             },
             'filter': ['==', ['geometry-type'], 'Point'],
