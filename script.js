@@ -17,9 +17,8 @@ const map = new mapboxgl.Map(
     }
 );
 
-//Variable for the hover and click events filling the campus boundary (placed here for consistency purposes)
+//Variable for the hover events filling the campus boundary (placed here for consistency purposes)
 let hoveredPolygonId = null;
-let clickedPolygonId = null;
 
 //Following map load, spatial data (GeoJSON file) is referenced from the remote repository, with its layers symbolized and added to the map
 map.on('load', () => {
@@ -100,7 +99,7 @@ map.on('load', () => {
         map.flyTo({
             center: [-79.39916, 43.66226], zoom: 15, //center: e.features[0].geometry.coordinates, zoom: 20,
         })
-        if (!map.removeLayer('study-spots')) { }
+        if (!map.removeLayer('study-spots')) {}
 
 
         map.addLayer({
@@ -139,12 +138,7 @@ map.on('load', () => {
         }
     });
 
-    map.setFeatureState({
-        source: 'map-data',
-
-
-
-    });
+    const bearing = e.feature.properties.bearing;
 
     //Zoom to feature
     map.on('click', 'study-spots', (e) => {
@@ -152,7 +146,7 @@ map.on('load', () => {
         map.flyTo({
             center: e.features[0].geometry.coordinates,
             zoom: 16.5,
-            bearing: angle,
+            bearing: e.features[0].properties.bearing,
             pitch: 75,
         });
     });
