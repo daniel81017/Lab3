@@ -171,7 +171,7 @@
             "type": "Feature",
             "properties": {
                 "description": "Sidney Smith Hall",
-                "bearing": 355
+                "bearing": -108.15
             },
             "geometry": {
                 "coordinates": [
@@ -186,7 +186,7 @@
             "type": "Feature",
             "properties": {
                 "description": "Robarts Library Harbord Apex",
-                "bearing": 40
+                "bearing": -179
             },
             "geometry": {
                 "coordinates": [
@@ -201,7 +201,7 @@
             "type": "Feature",
             "properties": {
                 "description": "Earth Sciences Building",
-                "bearing": 93
+                "bearing": -40
             },
             "geometry": {
                 "coordinates": [
@@ -216,7 +216,7 @@
             "type": "Feature",
             "properties": {
                 "description": "University College",
-                "bearing": 170
+                "bearing": -17.55
             },
             "geometry": {
                 "coordinates": [
