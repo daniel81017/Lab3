@@ -16,61 +16,11 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="bg-info text-black">
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">GGR472 Lab 3</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Getting around here
-                        </a>
-                        <ul class="dropdown-menu">
-                            <!-- Link to external "navigating to Walthamstow" pages in Navigation Bar -->
-                            <!-- Open new tab source: https://forum.bootstrapstudio.io/t/how-can-i-create-a-link-that-opens-in-a-new-tab/4288 -->
-                            <li><a class="dropdown-item" href="https://tfl.gov.uk/modes/cycling/santander-cycles"
-                                    target="_blank"> Boris
-                                    Bikes Cycle Hire</a></li>
-                            <li><a class="dropdown-item" href="https://tfl.gov.uk/status/tube" target="_blank">TfL Live
-                                    Service
-                                    Status</a></li>
-                            <li><a class="dropdown-item"
-                                    href="https://tfl.gov.uk/tube/stop/940GZZLUWWL/walthamstow-central-underground-station?lineId=victoria"
-                                    target="_blank">Victoria
-                                    Line Departures from Walthamstow Central Underground</a></li>
-                            <li><a class="dropdown-item"
-                                    href="https://www.nationalrail.co.uk/live-trains/departures/walthamstow-central/"
-                                    target="_blank">Weaver
-                                    Line Departures and Arrivals from Walthamstow Central Overground (a National Rail
-                                    site)</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item"
-                                    href="https://www.walthamforest.gov.uk/parking-roads-and-travel/roads-and-pavements/road-works"
-                                    target="_blank">Road
-                                    Works Information</a></li>
-                        </ul>
-                    </li>
-            </div>
-        </div>
-    </nav>
-
+<body>
     <!-- Title -->
     <div>
         <br><br>
-        <h1 class="text-center">Walthamstow, London</h1>
+        <h1 class="text-center">University of Toronto, St. George Campus</h1>
         <br>
     </div>
 
@@ -78,22 +28,15 @@
     <div class="container">
         <div class="row">
             <div class="col-3"></div>
-            <div class="col-6">Walthamstow is a borough in the northeast of Greater London. Though largely a commuter
-                and bedroom suburb, the <a target="_blank"
-                    href="https://www.walthamforest.gov.uk/libraries-arts-parks-and-leisure/local-markets/walthamstow-market/">Walthamstow
-                    Market</a> takes place most days on the High
-                Street. This area is more lively on Sundays as the Sunday Market offers "fresh
-                street food, community entertainment and local brands." To find out more about the Sunday Market and
-                Social, click <a target="_blank"
-                    href="https://www.walthamforest.gov.uk/events/walthamstow-sunday-market/">here</a>.
+            <div class="col-6">
+                The <a target="_blank" href="https://www.utoronto.ca/">University of Toronto</a> has three
+                campuses. The largest by student population is the St. George campus. in Downtown Toronto.
                 <br><br>
-                This map contains an outline of the neighbourhood immediately surrounding Walthamstow High Street.
-                Furthermore, there is an outline of the street itself. The bright red, meanwhile, outlines the buildings
-                that front onto High Street.
-                <br><br>
-                The three black circles immediately south of Walthamstow High Street are the nearest rail stations to
-                the area, with Underground and Overground services operated by Transport for London (TfL). Click on the
-                circular icons to see station name information!
+                This map contains useful information, including the campus boundary and important buildings (good study
+                spots as well). The bright green lines through campus are the main cycle routes to
+                navigate the area.
+                <br>
+                Click within the campus boundary to begin!
             </div>
             <div class="col-3"></div>
         </div>
@@ -102,15 +45,25 @@
         <div class="row">
             <div class="col-3"></div>
             <div class="col-6">
-                <div id="main-map1" class="map-container1"></div>
+                <div id="main-map1" class="map-container1">
+                    <div id="campus-legend" class="legend">
+                        <h4>Campus</h4>
+                        <div><span class="campus-boundary-line"></span>Campus Boundary</div>
+                        <div><span class="campus-block"></span>Campus</div>
+                        <div><span class="bike-routes-line"></span>Bike Routes</div>
+                        <div><span class="study-spots-circle"></span>Study Spots</div>
+                    </div>
+                </div>
             </div>
             <div class="col-3"></div>
         </div>
         <br><br>
+        <!-- Reset Button -->
         <div class="row">
             <div class="col-3"></div>
             <div class="col-6">
-                <button type="button" class="btn btn-secondary btn-lg" id="defaultviewbutton">Return to default view</button>
+                <button type="button" class="btn btn-secondary btn-lg" id="defaultviewbutton">Return to default
+                    view</button>
             </div>
             <div class="col-3"></div>
         </div>
