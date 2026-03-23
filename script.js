@@ -138,10 +138,15 @@ map.on('load', () => {
         }
     });
 
-    const bearing = e.feature.properties.bearing;
-
     //Zoom to feature
     map.on('click', 'study-spots', (e) => {
+        // const bearingValues = {
+        //     "University College": 355,
+        //     "Earth Sciences Building": 290,
+        //     "Robarts Library Harbord Apex": 100,
+        //     "Sidney Smith Hall": 39,
+        // }
+        // const bearing = bearingValues[e.feature.properties.description];
         // map.flyTo({center: [0, 0], zoom: 9});
         map.flyTo({
             center: e.features[0].geometry.coordinates,
@@ -149,6 +154,7 @@ map.on('load', () => {
             bearing: e.features[0].properties.bearing,
             pitch: 75,
         });
+
     });
 });
 
